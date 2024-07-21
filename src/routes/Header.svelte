@@ -27,7 +27,7 @@
 
 	<div class="corner">
 		<a href="https://github.com/BohaLash/url-shortener">
-			<img src={github} alt="GitHub" />
+			<img src={github} alt="GitHub" class="dark-theme-invert" />
 		</a>
 	</div>
 </header>
@@ -55,5 +55,11 @@
 		width: 2em;
 		height: 2em;
 		object-fit: contain;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.dark-theme-invert {
+			filter: invert(1);
+		}
 	}
 </style>
