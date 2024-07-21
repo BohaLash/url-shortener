@@ -23,6 +23,7 @@
 
 <style lang="scss">
 	footer {
+		margin-top: 5em;
 		text-align: center;
 	}
 </style>
