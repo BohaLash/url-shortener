@@ -7,20 +7,15 @@
 	<h1>About this app</h1>
 
 	<p>
-		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
-		following into your command line and following the prompts:
-	</p>
-
-	<pre>npm create svelte@latest</pre>
-
-	<p>
-		The page you're looking at is purely static HTML, with no client-side interactivity needed.
-		Because of that, we don't need to load any JavaScript. Try viewing the page's source, or opening
-		the devtools network panel and reloading.
+		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app 
+		deployed on <a href="https://pages.cloudflare.com">Cloudflare Pages</a>
+		using <a href="https://developers.cloudflare.com/kv/">Cloudflare KV</a>.
 	</p>
 
 	<p>
-		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
-		using it with JavaScript disabled!
+		This app has been created as a test task in accordance with 
+		<a href="https://obs.nodeart.app/NA/Hire/Questions/Svelte-Kit-Test-Task">instructions</a> 
+		by <a href="https://nodeart.io/">NodeArt</a>.
 	</p>
+
 </div>
