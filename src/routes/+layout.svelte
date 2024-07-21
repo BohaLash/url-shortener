@@ -11,11 +11,18 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>
+			created accordingly to 
+			<a href="https://obs.nodeart.app/NA/Hire/Questions/Svelte-Kit-Test-Task">
+				Svelte Kit Test Task
+			</a> 
+			manual
+		</p>
 	</footer>
 </div>
 
 <style lang="scss">
 	footer {
+		text-align: center;
 	}
 </style>
