@@ -1,5 +1,6 @@
 <script>
 	import Header from './Header.svelte';
+    import Footer from './Footer.svelte';
 	import '../app.scss';
 </script>
 
@@ -10,20 +11,8 @@
 		<slot />
 	</main>
 
-	<footer>
-		<p>
-			created accordingly to 
-			<a href="https://obs.nodeart.app/NA/Hire/Questions/Svelte-Kit-Test-Task">
-				Svelte Kit Test Task
-			</a> 
-			manual
-		</p>
-	</footer>
+	<Footer />
 </div>
 
 <style lang="scss">
-	footer {
-		margin-top: 5em;
-		text-align: center;
-	}
 </style>
