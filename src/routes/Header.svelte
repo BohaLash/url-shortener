@@ -7,7 +7,7 @@
 <header>
 	<div class="corner">
 		<a href="/">
-			<img src={logo} alt="SvelteKit" />
+			<img src={logo} alt="URL Shortener" />
 		</a>
 	</div>
 
