@@ -5,8 +5,8 @@
 </script>
 
 <svelte:head>
-	<title>Stats</title>
-	<meta name="description" content="Stats of generated links" />
+	<title>List</title>
+	<meta name="description" content="List of generated links" />
 </svelte:head>
 
 <section>
