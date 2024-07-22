@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { PageData, ActionData } from "./$types";
+	
+	import type { PageData } from "./$types";
 
 	export let data: PageData;
 </script>
@@ -22,6 +23,12 @@
 			</li>
 		{/each}
 	</ul>
+
+	{#if data.next}
+		<button class="secondary" type="button" on:click={loadMore}>
+			Load more
+		</button>
+	{/if}
 </section>
 
 <style lang="scss">
