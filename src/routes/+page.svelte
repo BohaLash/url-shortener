@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Form from './Form.svelte';
 </script>
 
@@ -24,6 +24,5 @@
 
 	h2 {
 		margin-top: 3em;
-		// padding: 1em;
 	}
 </style>
