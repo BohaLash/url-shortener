@@ -34,9 +34,22 @@
 		</p>
 	</hgroup>
 
-	<h5>URL: <a href={data.url}>{data.url}</a></h5>
+	<h5>
+		Short URL:
+		<a href={"/" + data.shortUrl}>
+			{$page.url.host + "/" + data.shortUrl}
+		</a>
+	</h5>
 
-	<h5>Total clicks: <mark>{data.totals ?? 'Error'}</mark></h5>
+	<h5>
+		Target URL: 
+		<a href={data.url}>{data.url}</a>
+	</h5>
+
+	<h5>
+		Total clicks: 
+		<mark>{data.totals ?? "Error"}</mark>
+	</h5>
 
 	{#if data.clicks.length}
 		<table>

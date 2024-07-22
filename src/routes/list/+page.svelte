@@ -28,6 +28,10 @@
 		<p>Click to open stats</p>
 	</hgroup>
 
+	{#if !data.links.length}
+		<p>No links generated yet.</p>
+	{/if}
+
 	<ul>
 		{#each data.links as link}
 			<li>
