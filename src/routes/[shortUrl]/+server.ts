@@ -16,7 +16,7 @@ export const GET: RequestHandler = async ({ platform, params, request, getClient
         ip: request.headers.get('True-Client-IP') ||
             request.headers.get('CF-Connecting-IP') ||
             getClientAddress(),
-        useragent: request.headers.get('useragent'),
+        useragent: request.headers.get('user-agent'),
         geo: request.headers.get('CF-IPCountry'),
     };
     console.log(metadata)
