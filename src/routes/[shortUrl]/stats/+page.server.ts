@@ -7,7 +7,7 @@ export const load = (async ({ platform, params }) => {
 
 	if (!URL_KV) return fail(500, { message: 'something went wrong' });
 
-	const url = await URL_KV.get(params.shortUrl);
+	const url = await URL_KV.get('/' + params.shortUrl);
 
 	if (!url) return fail(404, { message: 'URL not found' });
 

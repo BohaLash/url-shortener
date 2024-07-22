@@ -39,13 +39,13 @@ export const actions = {
         const url = data.get('url') as string;
         const shortUrl = data.get('shortUrl') as string;
 
-        const existingUrl = await URL_KV.get(shortUrl)
+        const existingUrl = await URL_KV.get('/' + shortUrl)
         if (existingUrl) return fail(402, {
             success: false,
             validationErrors: { shortUrl: ['Shortening already taken'] },
         });
 
-        await URL_KV.put(shortUrl, url)
+        await URL_KV.put('/' + shortUrl, url)
 
         return { success: true, stats: shortUrl + '/stats', validationErrors: undefined };
     },

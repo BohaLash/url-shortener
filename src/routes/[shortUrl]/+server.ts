@@ -20,7 +20,7 @@ export const GET: RequestHandler = async ({ platform, params, request, getClient
 
     if (!URL_KV) return error(500, 'something went wrong');
 
-    const url = await URL_KV.get(params.shortUrl);
+    const url = await URL_KV.get('/' + params.shortUrl);
 
     if (!url) return error(404, 'short url not found');
 
