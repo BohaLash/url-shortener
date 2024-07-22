@@ -1,5 +1,8 @@
 <script lang="ts">
+    import type { ActionData } from "./$types";
 	import Form from "./Form.svelte";
+
+	export let form: ActionData;
 </script>
 
 <svelte:head>
@@ -18,7 +21,7 @@
 		</p>
 	</hgroup>
 
-	<Form />
+	<Form bind:form />
 </section>
 
 <style lang="scss">

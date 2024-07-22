@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@picocss/pico": "^2.0.6"
+		"@picocss/pico": "^2.0.6",
+		"url-regex": "^5.0.0"
 	}
 }

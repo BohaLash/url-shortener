@@ -1,16 +1,14 @@
 <script lang="ts">
-	let isLoading = true;
-	let generatedStatsUrl: string;
+	import { enhance } from "$app/forms";
+	import type { ActionData, SubmitFunction } from "./$types";
 
-	const generate = async () => {
-		isLoading = false;
+	export let form: ActionData;
 
-		const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
-		await delay(1000);
-		generatedStatsUrl = "stats";
+	$: errors = form?.validationErrors as { [index: string]: string[] | undefined }
+	$: areAnyErrors = !!errors?.url || !!errors?.shortUrl || !!errors?.nonFieldErrors
 
-		isLoading = true;
-	};
+	let isLoading = false;
+	let generatedStatsUrl: string | undefined;
 
 	const handleUrlProtocol = (e: FocusEvent) => {
 		const DEFAULT_PROTOCOL = "https";
@@ -25,10 +23,34 @@
 
 		element.value = DEFAULT_PROTOCOL + "://" + element.value;
 	};
+
+	const formHandler: SubmitFunction = ({}) => {
+		isLoading = true;
+
+		return async ({ result, update }) => {
+			await update();
+			if (result.type === 'success')
+				generatedStatsUrl = result.data!.stats as string | undefined
+			isLoading = false;
+		};
+	};
 </script>
 
-<form on:submit={generate}>
+<form
+	method="post"
+	use:enhance={formHandler}
+	on:input={() => errors && (errors.nonFieldErrors = undefined)}
+	class:wrong={areAnyErrors && false}
+>
 	<fieldset>
+		{#if errors?.nonFieldErrors}
+			<legend id="nonFieldErrors-errors" class="errors">
+				{#each errors?.nonFieldErrors as error}
+					<span>{error}</span>
+				{/each}
+			</legend>
+		{/if}
+
 		<label>
 			URL
 			<input
@@ -37,18 +59,35 @@
 				required
 				placeholder="https://example.com"
 				aria-label="Target URL you to shorten"
+				aria-describedby="url-errors"
+				aria-invalid={errors?.url && true}
 				on:blur={handleUrlProtocol}
+				on:input={() => errors && (errors.url = undefined)}
 			/>
+			<small id="url-errors">
+				{#each errors?.url || [] as error}
+					<span>{error}</span>
+				{/each}
+			</small>
 		</label>
 
 		<label>
 			Alias
 			<input
-				name="alias"
+				name="shortUrl"
 				required
+				pattern="[a-zA-Z0-9-]+"
 				placeholder="short-url"
 				aria-label="A shortening alias for the URL"
+				aria-describedby="shortUrl-errors"
+				aria-invalid={errors?.shortUrl && true}
+				on:input={() => errors && (errors.shortUrl = undefined)}
 			/>
+			<small id="shortUrl-errors">
+				{#each errors?.shortUrl || [] as error}
+					<span>{error}</span>
+				{/each}
+			</small>
 		</label>
 	</fieldset>
 
@@ -61,19 +100,41 @@
 	{:else}
 		<button
 			type="submit"
-			aria-busy={!isLoading}
-			aria-label={isLoading ? "Generate a link" : "Please wait..."}
-			disabled={!isLoading}
+			aria-busy={isLoading}
+			aria-label={isLoading ? "Please wait..." : "Generate a link"}
+			disabled={isLoading || areAnyErrors}
 		>
-			{#if isLoading}
+			{#if !isLoading}
 				Generate
 			{/if}
 		</button>
 	{/if}
 </form>
 
-<style class="scss">
+<style lang="scss">
+
 	form {
 		text-align: start;
+	}
+
+	.errors {
+		color: rgb(136, 57, 53);
+	}
+
+	.wrong {
+		outline: solid 1px;
+		outline-offset: 10px;
+		border-radius: 1px;
+		outline-color: rgb(136, 57, 53);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.errors {
+			color: rgb(206, 126, 123);
+		}
+
+		.wrong {
+			outline-color: rgb(206, 126, 123);
+		}
 	}
 </style>
