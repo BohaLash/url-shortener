@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData, ActionData } from "./$types";
+	import type { PageData } from "./$types";
 
 	export let data: PageData;
 </script>
@@ -27,6 +27,7 @@
 			<thead>
 				<tr>
 					<th scope="col">Time</th>
+					<th scope="col">Date</th>
 					<th scope="col">IP</th>
 					<th scope="col">Useragent</th>
 					<th scope="col">Geo</th>
@@ -34,11 +35,13 @@
 			</thead>
 			<tbody>
 				{#each data.clicks as click}
+					{@const date = new Date(click.time)}
 					<tr>
-						<th scope="row">{click.datetime}</th>
-						<td>{click.ip}</td>
-						<td>{click.useragent}</td>
-						<td>{click.geo}</td>
+						<th scope="row">{date.toLocaleTimeString()}</th>
+						<th scope="row">{date.toLocaleDateString()}</th>
+						<td>{click.ip || 'unknown'}</td>
+						<td>{click.useragent || 'unknown'}</td>
+						<td>{click.geo || 'unknown'}</td>
 					</tr>
 				{/each}
 			</tbody>
