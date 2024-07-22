@@ -1,0 +1,7 @@
+name = "url-shortener"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_flags = [ "nodejs_compat" ]
+
+[[kv_namespaces]]
+binding = "URL_KV"
+id = "97ac13473d434cc597c1012186463236"
