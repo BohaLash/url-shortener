@@ -10,8 +10,10 @@
 </svelte:head>
 
 <section>
-	<h1>List of generated links:</h1>
-	<p>Click to open stats</p>
+	<hgroup>
+		<h1>List of generated links:</h1>
+		<p>Click to open stats</p>
+	</hgroup>
 
 	<ul>
 		{#each data.links as link}
