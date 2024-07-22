@@ -1,8 +1,20 @@
 <script lang="ts">
-	
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
+
+	let isLoading = false;
+
+	const loadMore = async () => {
+		isLoading = true;
+		const response = await fetch(`/api/stats?next=${data.next}`);
+		if (response.ok) {
+			const res = await response.json();
+			data.links.push(...res.links);
+			data.next = res.next;
+		}
+		isLoading = false;
+	};
 </script>
 
 <svelte:head>
@@ -25,8 +37,17 @@
 	</ul>
 
 	{#if data.next}
-		<button class="secondary" type="button" on:click={loadMore}>
-			Load more
+		<button
+			class="secondary"
+			type="button"
+			aria-busy={isLoading}
+			aria-label={isLoading ? "Please wait..." : "Load more links"}
+			disabled={isLoading}
+			on:click={loadMore}
+		>
+			{#if !isLoading}
+				Load more
+			{/if}
 		</button>
 	{/if}
 </section>

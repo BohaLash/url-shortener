@@ -1,7 +1,23 @@
 <script lang="ts">
+	import { page } from "$app/stores";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
+
+	let isLoading = false;
+
+	const loadMore = async () => {
+		isLoading = true;
+		const response = await fetch(
+			`/api/stats/${$page.params.shortUrl}?next=${data.next}`,
+		);
+		if (response.ok) {
+			const res = await response.json();
+			data.clicks.push(...res.clicks);
+			data.next = res.next;
+		}
+		isLoading = false;
+	};
 </script>
 
 <svelte:head>
@@ -39,13 +55,28 @@
 					<tr>
 						<th scope="row">{date.toLocaleTimeString()}</th>
 						<th scope="row">{date.toLocaleDateString()}</th>
-						<td>{click.ip || 'unknown'}</td>
-						<td>{click.useragent || 'unknown'}</td>
-						<td>{click.geo || 'unknown'}</td>
+						<td>{click.ip || "unknown"}</td>
+						<td>{click.useragent || "unknown"}</td>
+						<td>{click.geo || "unknown"}</td>
 					</tr>
 				{/each}
 			</tbody>
 		</table>
+
+		{#if data.next}
+			<button
+				class="secondary"
+				type="button"
+				aria-busy={isLoading}
+				aria-label={isLoading ? "Please wait..." : "Load more clicks"}
+				disabled={isLoading}
+				on:click={loadMore}
+			>
+				{#if !isLoading}
+					Load more
+				{/if}
+			</button>
+		{/if}
 	{/if}
 </section>
 

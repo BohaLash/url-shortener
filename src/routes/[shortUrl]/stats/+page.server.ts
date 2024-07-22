@@ -1,6 +1,10 @@
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
+
+const PAGE_LIMIT = 10;
+
+
 export const load = (async ({ platform, params }) => {
 
 	const URL_KV = platform?.env?.URL_KV;
@@ -11,7 +15,7 @@ export const load = (async ({ platform, params }) => {
 
 	if (!url) return fail(404, { message: 'URL not found' });
 
-	const clicks = await URL_KV.list({ prefix: params.shortUrl + '/' });
+	const clicks = await URL_KV.list({ prefix: params.shortUrl + '/', limit: PAGE_LIMIT });
 
 	if (!clicks || !clicks.keys) return fail(500, { message: 'something went wrong' });
 
@@ -19,6 +23,7 @@ export const load = (async ({ platform, params }) => {
 		url,
 		shortUrl: params.shortUrl,
 		totals: clicks.keys.length, // TODO: fix
-		clicks: clicks.keys.map((click: { name: string, metadata: any }) => click.metadata)
+		clicks: clicks.keys.map((click: { name: string, metadata: any }) => click.metadata),
+		next: !clicks.list_complete && clicks.cursor,
 	};
 }) satisfies PageServerLoad;

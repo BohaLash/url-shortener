@@ -2,13 +2,16 @@ import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 
+const PAGE_LIMIT = 10
+
+
 export const load = (async ({ platform }) => {
 
 	const URL_KV = platform?.env?.URL_KV;
 
 	if (!URL_KV) return fail(500, { message: 'something went wrong' });
 
-	const links = await URL_KV.list({ prefix: '/' });
+	const links = await URL_KV.list({ prefix: '/', limit: PAGE_LIMIT });
 
 	if (!links || !links.keys) return fail(500, { message: 'something went wrong' });
 
