@@ -37,7 +37,7 @@
 	<h5>
 		Short URL:
 		<a href={"/" + data.shortUrl}>
-			{$page.url.host + "/" + data.shortUrl}
+			{($page?.url?.host || '') + "/" + data.shortUrl}
 		</a>
 	</h5>
 
