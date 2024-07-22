@@ -1,29 +1,17 @@
 import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load = (({ cookies }) => {
+export const load = (async ({ platform }) => {
 
-	interface Link {
-		url: string
-		shortUrl: string
-	}
+	const URL_KV = platform?.env?.URL_KV;
 
-	const links: Link[] = [
-		{
-			url: 'google.com',
-			shortUrl: 'goo',
-		},
-		{
-			url: 'youtube.com',
-			shortUrl: 'yt',
-		},
-		{
-			url: 'facebook.com',
-			shortUrl: 'fb',
-		},
-	]
+	if (!URL_KV) return fail(500, { message: 'something went wrong' });
+
+	const links = await URL_KV.list({ prefix: '/' });
+
+	if (!links || !links.keys) return fail(500, { message: 'something went wrong' });
 
 	return {
-		links,
+		links: links.keys.map((link: { name: string }) => link.name),
 	};
 }) satisfies PageServerLoad;

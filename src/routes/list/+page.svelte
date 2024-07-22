@@ -18,7 +18,7 @@
 	<ul>
 		{#each data.links as link}
 			<li>
-				<a href={link.shortUrl + "/stats"}>{link.url}</a>
+				<a href={link + "/stats"}>{link}</a>
 			</li>
 		{/each}
 	</ul>
