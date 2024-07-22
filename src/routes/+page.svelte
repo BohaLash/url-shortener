@@ -19,10 +19,7 @@
 
 <style lang="scss">
 	section {
+		padding-top: 5em;
 		text-align: center;
-	}
-
-	h2 {
-		margin-top: 3em;
 	}
 </style>

@@ -10,12 +10,6 @@ dependencies:
     version: 2.0.6
 
 devDependencies:
-  '@fontsource/fira-mono':
-    specifier: ^4.5.10
-    version: 4.5.10
-  '@neoconfetti/svelte':
-    specifier: ^1.0.0
-    version: 1.0.0
   '@sveltejs/adapter-auto':
     specifier: ^3.0.0
     version: 3.2.2(@sveltejs/kit@2.5.18)
@@ -548,10 +542,6 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
-  /@fontsource/fira-mono@4.5.10:
-    resolution: {integrity: sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==}
-    dev: true
-
   /@jridgewell/gen-mapping@0.3.5:
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
@@ -587,10 +577,6 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
-    dev: true
-
-  /@neoconfetti/svelte@1.0.0:
-    resolution: {integrity: sha512-SmksyaJAdSlMa9cTidVSIqYo1qti+WTsviNDwgjNVm+KQ3DRP2Df9umDIzC4vCcpEYY+chQe0i2IKnLw03AT8Q==}
     dev: true
 
   /@picocss/pico@2.0.6:
