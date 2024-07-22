@@ -7,4 +7,4 @@ binding = "URL_KV"
 id = "97ac13473d434cc597c1012186463236"
 
 [vars]
-NODE_VERSION = 22
+NODE_VERSION = "22"
