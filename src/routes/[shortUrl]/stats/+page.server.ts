@@ -4,7 +4,7 @@ import type { PageServerLoad } from './$types';
 export const load = (({ cookies }) => {
 
 	return {
-		url: 'google.com',
+		url: 'https://google.com',
 		shortUrl: 'g',
 		totals: 0,
 		clicks: [
