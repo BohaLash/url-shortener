@@ -29,7 +29,7 @@ export const GET: RequestHandler = async ({ platform, params, request, getClient
 
     if (!url) return error(404, 'short url not found');
 
-    URL_KV.put(params.shortUrl + '/' + uuidv7(), '', { metadata });
+    await URL_KV.put(params.shortUrl + '/' + uuidv7(), '', { metadata });
 
     return redirect(302, url);
 };
