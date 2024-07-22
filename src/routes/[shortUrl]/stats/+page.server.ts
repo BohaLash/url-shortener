@@ -13,8 +13,6 @@ export const load = (async ({ platform, params }) => {
 
 	const clicks = await URL_KV.list({ prefix: params.shortUrl + '/' });
 
-	console.log(clicks)
-
 	if (!clicks || !clicks.keys) return fail(500, { message: 'something went wrong' });
 
 	return {

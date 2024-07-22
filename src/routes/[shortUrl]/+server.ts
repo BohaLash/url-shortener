@@ -7,10 +7,6 @@ import { v7 as uuidv7 } from 'uuid';
 
 export const GET: RequestHandler = async ({ platform, params, request, getClientAddress }) => {
 
-    console.log(request.headers.get('True-Client-IP'))
-    console.log(request.headers.get('CF-Connecting-IP'))
-    console.log(getClientAddress())
-
     const metadata = {
         time: Date.now(),
         ip: request.headers.get('True-Client-IP') ||
@@ -19,7 +15,6 @@ export const GET: RequestHandler = async ({ platform, params, request, getClient
         useragent: request.headers.get('user-agent'),
         geo: request.headers.get('CF-IPCountry'),
     };
-    console.log(metadata)
 
     const URL_KV = platform?.env?.URL_KV;
 
