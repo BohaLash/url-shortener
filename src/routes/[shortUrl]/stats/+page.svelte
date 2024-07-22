@@ -36,7 +36,7 @@
 
 	<h5>URL: <a href={data.url}>{data.url}</a></h5>
 
-	<h5>Total clicks: <mark>{data.totals}</mark></h5>
+	<h5>Total clicks: <mark>{data.totals ?? 'Error'}</mark></h5>
 
 	{#if data.clicks.length}
 		<table>

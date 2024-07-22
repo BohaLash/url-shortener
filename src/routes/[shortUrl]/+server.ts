@@ -26,5 +26,8 @@ export const GET: RequestHandler = async ({ platform, params, request, getClient
 
     await URL_KV.put(params.shortUrl + '/' + uuidv7(), '', { metadata });
 
+    const totals = parseInt(await URL_KV.get('totals/' + params.shortUrl)) || 0;
+    await URL_KV.put('totals/' + params.shortUrl, totals + 1);
+
     return redirect(302, url);
 };
