@@ -13,7 +13,8 @@
 		);
 		if (response.ok) {
 			const res = await response.json();
-			data.clicks.push(...res.clicks);
+			if (data.clicks) data.clicks.push(...res.clicks);
+			else data.clicks = res.clicks;
 			data.next = res.next;
 		}
 		isLoading = false;
@@ -37,21 +38,21 @@
 	<h5>
 		Short URL:
 		<a href={"/" + data.shortUrl}>
-			{($page?.url?.host || '') + "/" + data.shortUrl}
+			{$page.url.host + "/" + data.shortUrl}
 		</a>
 	</h5>
 
 	<h5>
-		Target URL: 
+		Target URL:
 		<a href={data.url}>{data.url}</a>
 	</h5>
 
 	<h5>
-		Total clicks: 
+		Total clicks:
 		<mark>{data.totals ?? "Error"}</mark>
 	</h5>
 
-	{#if data.clicks.length}
+	{#if data.clicks?.length}
 		<table>
 			<thead>
 				<tr>
