@@ -17,6 +17,6 @@ export const load = (async ({ platform }) => {
 
 	return {
 		links: links.keys.map((link: { name: string }) => link.name),
-		next: !links.list_complete && links.cursor,
+		next: !links.list_complete && links.cursor || null,
 	};
 }) satisfies PageServerLoad;

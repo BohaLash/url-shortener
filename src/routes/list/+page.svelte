@@ -9,7 +9,7 @@
 		isLoading = true;
 		const response = await fetch(`/api/stats?next=${data.next}`);
 		if (response.ok) {
-			const res = await response.json();
+			const res = await response.json<{links: string[], next: string | null}>();
 			data.links.push(...res.links);
 			data.next = res.next;
 		}

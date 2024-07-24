@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import type { PageData } from "./$types";
+	import type { Metadata } from "../+server";
 
 	export let data: PageData;
 
@@ -12,7 +13,7 @@
 			`/api/stats/${$page.params.shortUrl}?next=${data.next}`,
 		);
 		if (response.ok) {
-			const res = await response.json();
+			const res = await response.json<{clicks: Metadata[], next: string | null}>();
 			if (data.clicks) data.clicks.push(...res.clicks);
 			else data.clicks = res.clicks;
 			data.next = res.next;
@@ -65,10 +66,10 @@
 			</thead>
 			<tbody>
 				{#each data.clicks as click}
-					{@const date = new Date(click.time)}
+					{@const date = click.time && new Date(click.time) || null}
 					<tr>
-						<th scope="row">{date.toLocaleTimeString()}</th>
-						<th scope="row">{date.toLocaleDateString()}</th>
+						<th scope="row">{date?.toLocaleTimeString() ?? "unknown"}</th>
+						<th scope="row">{date?.toLocaleDateString() ?? "unknown"}</th>
 						<td>{click.ip || "unknown"}</td>
 						<td>{click.useragent || "unknown"}</td>
 						<td>{click.geo || "unknown"}</td>
